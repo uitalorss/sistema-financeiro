@@ -53,6 +53,35 @@ a:hover {
   margin-bottom: 0.8rem;
 }
 
+.btn {
+  padding: 1rem 2rem;
+  width: 45%;
+}
+
+.cancel {
+  background: #f0f2f5;
+  border: 2px solid #e92929;
+  color: #e92929;
+}
+
+.cancel:hover {
+  background: #e92929;
+  border: 2px solid #e92929;
+  color: #f0f2f5;
+  transition: 0.5s;
+}
+
+.submit {
+  background: #49aa26;
+  border: 2px solid #49aa26;
+  color: #f0f2f5;
+}
+
+.submit:hover {
+  background: #3dd705;
+  transition: 0.5s;
+}
+
 /* Header */
 header {
   background-color: #2d4a22;
@@ -185,6 +214,38 @@ footer {
 .modal {
   background: #f0f2f5;
   padding: 2.5rem;
+}
+
+/* form */
+.modal input {
+  width: 100%;
+}
+
+.info {
+  color: #969cb3;
+}
+
+.title-modal {
+  margin-top: 0;
+}
+
+input {
+  border: none;
+  width: 100%;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+}
+
+.input-group {
+  margin-top: 1rem;
+}
+
+.info {
+  margin-bottom: 1rem;
+}
+
+.btn-actions {
+  margin-top: 1rem;
 }
 
 /* Responsivo */
