@@ -103,10 +103,13 @@ header h1 {
 
 /*transaction */
 #data-table {
-  display: block;
   width: 100%;
   border-spacing: 0 0.7rem;
   color: #969cb3;
+}
+
+#transaction {
+  display: block;
   overflow-x: auto;
 }
 
