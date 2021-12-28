@@ -6,6 +6,9 @@
 
 :root {
   --dark-blue: #363f5f;
+  --green: #49aa26;
+  --light-green: #3dd705;
+  --red: #e92929;
 }
 
 body {
@@ -40,12 +43,12 @@ h2 {
 
 /* links & buttons */
 a {
-  color: #49aa26;
+  color: var(--green);
   text-decoration: none;
 }
 
 a:hover {
-  color: #3dd705;
+  color: var(--light-green);
 }
 
 .button.new {
@@ -55,30 +58,32 @@ a:hover {
 
 .btn {
   padding: 1rem 2rem;
-  width: 45%;
+  width: 48%;
+  border-radius: 0.25rem;
+  cursor: pointer;
 }
 
 .cancel {
   background: #f0f2f5;
-  border: 2px solid #e92929;
-  color: #e92929;
+  border: 2px solid var(--red);
+  color: var(--red);
 }
 
 .cancel:hover {
-  background: #e92929;
-  border: 2px solid #e92929;
+  background: var(--red);
+  border: 2px solid var(--red);
   color: #f0f2f5;
   transition: 0.5s;
 }
 
 .submit {
-  background: #49aa26;
-  border: 2px solid #49aa26;
+  background: var(--green);
+  border: 2px solid var(--green);
   color: #f0f2f5;
 }
 
 .submit:hover {
-  background: #3dd705;
+  background: var(--light-green);
   transition: 0.5s;
 }
 
@@ -126,7 +131,7 @@ header h1 {
 }
 
 .card.total {
-  background-color: #49aa26;
+  background-color: var(--green);
   color: #ffffff;
 }
 
@@ -178,11 +183,11 @@ td.date {
 }
 
 td.expense {
-  color: #e92929;
+  color: var(--red);
 }
 
 td.income {
-  color: #49aa26;
+  color: var(--green);
 }
 
 /* footer */
@@ -242,6 +247,9 @@ input {
 
 .btn-actions {
   margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Responsivo */
