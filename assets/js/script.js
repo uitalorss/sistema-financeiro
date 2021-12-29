@@ -15,6 +15,18 @@ const transactions = [
     amount: -20000,
     date: "01/01/2022"
   },
+  {
+    id: 2,
+    description: "Criação de website",
+    amount: 200000,
+    date: "01/01/2022"
+  },
+  {
+    id: 3,
+    description: "Aluguel",
+    amount: -80000,
+    date: "01/01/2022"
+  },
 ]
 
 const treatmentBalance = {
@@ -49,5 +61,7 @@ const treatmentTransaction = {
   }
 }
 
-treatmentTransaction.addTransaction(transactions[0])
 
+transactions.forEach((transaction) =>{
+  treatmentTransaction.addTransaction(transaction)
+})
