@@ -51,9 +51,10 @@ const treatmentTransaction = {
     treatmentTransaction.transactionsContainer.appendChild(tr)
   },
   transactionHTML(transaction){
+    const cssClass = transaction.amount > 0 ? "income" : "expense";
     const tableRowTransaction = `
       <td class="description">${transaction.description}</td>
-      <td class="expense">R$ ${transaction.amount}</td>
+      <td class="${cssClass}">R$ ${transaction.amount}</td>
       <td class="date">${transaction.date}</td>
       <td><img src="assets/img/minus.svg" alt="remover transação"></td>
     `
