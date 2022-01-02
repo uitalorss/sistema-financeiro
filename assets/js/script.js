@@ -35,6 +35,11 @@ const treatmentBalance = {
     treatmentBalance.all.push(transaction);
     App.reload();
   },
+
+  remove(index){
+    treatmentBalance.all.splice(index, 1);
+    App.reload();
+  },
   incomes(){
     let income = 0
     treatmentBalance.all.forEach(transaction => {
@@ -139,12 +144,4 @@ const App = {
 
 //chamando para inicializar para preencher os dados da aplicação
 App.init();
-
-//adicionando um dado de teste na mão grande.
-treatmentBalance.add({
-  id: 5,
-  description: "teste",
-  amount: 500,
-  date: "01/01/2022"
-})
 
