@@ -30,9 +30,14 @@ const transactions = [
 ]
 
 const treatmentBalance = {
+  all: transactions,
+  add(transaction){
+    treatmentBalance.all.push(transaction);
+    App.reload();
+  },
   incomes(){
     let income = 0
-    transactions.forEach(transaction => {
+    treatmentBalance.all.forEach(transaction => {
       if(transaction.amount > 0){
         income += transaction.amount;
       }
@@ -41,7 +46,7 @@ const treatmentBalance = {
   },
   expenses(){
     let expense = 0
-    transactions.forEach(transaction => {
+    treatmentBalance.all.forEach(transaction => {
       if(transaction.amount < 0){
         expense += transaction.amount;
       }
@@ -81,6 +86,7 @@ const treatmentTransaction = {
     return tableRowTransaction;
   },
 
+  //mostrando os dados do balance no card.
   updateBalance(){
     document
       .getElementById("incomeDisplay")
@@ -91,6 +97,11 @@ const treatmentTransaction = {
     document
       .getElementById("totalDisplay")
       .innerHTML = utils.formatCurrency(treatmentBalance.total())
+  },
+
+  //método para limpar os dados de transação
+  clearTransactions(){
+    treatmentTransaction.transactionsContainer.innerHTML = "";
   }
 }
 
@@ -108,9 +119,32 @@ const utils = {
   }
 }
 
-//tratamento para percorrer o array
-transactions.forEach((transaction) =>{
-  treatmentTransaction.addTransaction(transaction)
+//tratamento para iniciar a aplicação e preencher os dados de forma saudável.
+const App = {
+  //O init preencherá os dados da transaction e do balance.
+  init(){
+    //tratamento para percorrer o array
+    transactions.forEach((transaction) =>{
+      treatmentTransaction.addTransaction(transaction)
+    })
+    treatmentTransaction.updateBalance();
+  },
+
+  //O reload vai atualizar os dados quando houver alguma inserção ou remoção
+  reload(){
+    treatmentTransaction.clearTransactions();
+    App.init();
+  }
+}
+
+//chamando para inicializar para preencher os dados da aplicação
+App.init();
+
+//adicionando um dado de teste na mão grande.
+treatmentBalance.add({
+  id: 5,
+  description: "teste",
+  amount: 500,
+  date: "01/01/2022"
 })
 
-treatmentTransaction.updateBalance();
