@@ -31,11 +31,14 @@ const transactions = [
 
 const treatmentBalance = {
   all: transactions,
+
+  //método para inserção de dados da transação
   add(transaction){
     treatmentBalance.all.push(transaction);
     App.reload();
   },
 
+  //método para remoção de dados da transação
   remove(index){
     treatmentBalance.all.splice(index, 1);
     App.reload();
@@ -121,6 +124,20 @@ const utils = {
       currency: "BRL"
     })
     return signal + value    
+  }
+}
+
+const Form = {
+  submit(event){
+    event.preventDefault();
+
+    //verificar se todos os campos foram preenchidos
+    //formatar os dados para salvar
+    //salvar
+    //apagar os dados do formulário
+    //fechar modal
+    //atualizar a aplicação
+    console.log(event)
   }
 }
 
