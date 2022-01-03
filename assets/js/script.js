@@ -9,29 +9,19 @@ const modal = {
   }
 }
 
-const transactions = [
-  {
-    id: 1,
-    description: "Conta de Luz",
-    amount: -20000,
-    date: "01/01/2022"
+const Storage = {
+  get(){
+    return JSON.parse(localStorage.getItem("devfinances:treatmentBalance")) || []
   },
-  {
-    id: 2,
-    description: "Criação de website",
-    amount: 800001,
-    date: "01/01/2022"
-  },
-  {
-    id: 3,
-    description: "Aluguel",
-    amount: -80000,
-    date: "01/01/2022"
-  },
-]
+  set(treatmentBalance){
+    localStorage.setItem("devfinances:treatmentBalance", JSON.stringify(treatmentBalance));
+  }
+}
+
+
 
 const treatmentBalance = {
-  all: transactions,
+  all: Storage.get(),
 
   //método para inserção de dados da transação
   add(transaction){
@@ -218,10 +208,11 @@ const App = {
   //O init preencherá os dados da transaction e do balance.
   init(){
     //tratamento para percorrer o array
-    transactions.forEach((transaction, index) =>{
+    treatmentBalance.all.forEach((transaction, index) =>{
       treatmentTransaction.addTransaction(transaction, index)
     })
     treatmentTransaction.updateBalance();
+    Storage.set(treatmentBalance.all);
   },
 
   //O reload vai atualizar os dados quando houver alguma inserção ou remoção
