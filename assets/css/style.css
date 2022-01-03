@@ -87,6 +87,10 @@ a:hover {
   transition: 0.5s;
 }
 
+.btnRemove {
+  cursor: pointer;
+}
+
 /* Header */
 header {
   background-color: #2d4a22;

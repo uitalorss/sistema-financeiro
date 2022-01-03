@@ -1,3 +1,4 @@
+//Função para tratar o modal para deixar ativo ou não
 const modal = {
   open(){
     document.querySelector(".modal-overlay").classList.add("active");
@@ -75,21 +76,21 @@ const treatmentTransaction = {
   //método para adicionar a linha na tabela.
   addTransaction(transaction, index){
     const tr = document.createElement('tr');
-    tr.innerHTML = treatmentTransaction.transactionHTML(transaction);
+    tr.innerHTML = treatmentTransaction.transactionHTML(transaction, index);
     treatmentTransaction.transactionsContainer.appendChild(tr);    
   },
 
   //método para preenchimento das linhas da tabela de transações
   //a depender se for despesa ou receita, a const css class vai atribuir a cor da linha
   // o tratamento dos valores está na const amount, que recebe a função utils
-  transactionHTML(transaction){
+  transactionHTML(transaction, index){
     const cssClass = transaction.amount > 0 ? "income" : "expense";
     const amount = utils. formatCurrency(transaction.amount);
     const tableRowTransaction = `
       <td class="description">${transaction.description}</td>
       <td class="${cssClass}">${amount}</td>
       <td class="date">${transaction.date}</td>
-      <td><img src="assets/img/minus.svg" alt="remover transação"></td>
+      <td><img onclick="treatmentBalance.remove(${index})" class="btnRemove" src="assets/img/minus.svg" alt="remover transação"></td>
     `
     return tableRowTransaction;
   },
@@ -156,6 +157,7 @@ const Form = {
   validateFields(){
     //Desestruturando o getValues para poder pegar seus dados e atribuir a dados dessa função de forma mais enxuta. 
     const{description, amount, date} = Form.getValues();
+    
     //Usando a função trim do JS para remover os espaços e verificar se os campos estão preenchidos
     if(description.trim() === "" || amount.trim() === "" || date.trim() === ""){
       //Passando um novo erro.
@@ -173,31 +175,38 @@ const Form = {
     }
   },
 
+  //Função para limpar dados do modal
   clearFields(){
     Form.description.value = "";
     Form.amount.value = "";
     Form.date.value = "";
   },
 
-  
+  //Salvando dados informados no modal e adicionando na tabela de transações.
   saveTransaction(transaction){
     treatmentBalance.add(transaction);
   },
+
+  //tratamento para pegar o clique ao salvar
   submit(event){
     event.preventDefault();
 
     try {
       //verificar se todos os campos foram preenchidos
       Form.validateFields();
+      
       //formatar os dados para salvar
       const transaction = Form.formatValues();
+      
       //salvar
       Form.saveTransaction(transaction);
+      
       //apagar os dados do formulário
       Form.clearFields();
+      
       //fechar modal
       modal.close();
-      //atualizar a aplicação
+      
     } catch (error) {
       alert(error.message);  
     }
@@ -209,8 +218,8 @@ const App = {
   //O init preencherá os dados da transaction e do balance.
   init(){
     //tratamento para percorrer o array
-    transactions.forEach((transaction) =>{
-      treatmentTransaction.addTransaction(transaction)
+    transactions.forEach((transaction, index) =>{
+      treatmentTransaction.addTransaction(transaction, index)
     })
     treatmentTransaction.updateBalance();
   },
